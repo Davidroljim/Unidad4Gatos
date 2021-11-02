@@ -1,9 +1,9 @@
 <?php
 $servidor = "localhost";
-$baseDatos = "agenciaviajes";
-$usuario = "developer";
-$pass = "developer";
-function obtenerElemento($id)
+$baseDatos = "animales";
+$usuario = "root";
+$pass = "root";
+function obtenerGato($id)
 {
     try {
         $con = new PDO("mysql:host=" . $GLOBALS['servidor'] . ";dbname=" . $GLOBALS['baseDatos'], $GLOBALS['usuario'], $GLOBALS['pass']);
@@ -18,7 +18,7 @@ function obtenerElemento($id)
     $con = null;
     return $row;
 }
-function eliminarElemento($id)
+function eliminarGato($id)
 {
     try {
         $con = new PDO("mysql:host=" . $GLOBALS['servidor'] . ";dbname=" . $GLOBALS['baseDatos'], $GLOBALS['usuario'], $GLOBALS['pass']);
@@ -35,7 +35,7 @@ function eliminarElemento($id)
     $con = null;
     return $retorno;
 }
-function editarElemento($id, $nombre, $dni, $edad, $sexo, $raza, $fechaAlta, $foto)
+function editarGato($id, $nombre, $dni, $edad, $sexo, $raza, $fechaAlta, $foto)
 {
     try {
         $con = new PDO("mysql:host=" . $GLOBALS['servidor'] . ";dbname=" . $GLOBALS['baseDatos'], $GLOBALS['usuario'], $GLOBALS['pass']);
@@ -77,20 +77,24 @@ function obtenerTodos()
     $con = null;
     return $miArray;
 }
-function insertaElemento($nombre, $dni, $edad, $sexo, $raza, $fechaAlta, $foto)
+function insertaGato($nombre, $dni, $edad, $sexo, $raza, $fechaAlta, $foto)
 {
     try {
         $con = new PDO("mysql:host=" . $GLOBALS['servidor'] . ";dbname=" . $GLOBALS['baseDatos'], $GLOBALS['usuario'], $GLOBALS['pass']);
     } catch (PDOException $e) {
         echo $e;
     }
-    $sql = $con->prepare("INSERT into turista values(null,:nombre,:apellido1,:apellido2,:direccion,:telefono)");
+    $sql = $con->prepare("INSERT into gatos values(null,:nombre,:dni,:edad,:sexo,:raza,:fechaAlta,:foto)");
     $sql->bindParam(":nombre", $nombre);
-    $sql->bindParam(":apellido1", $ape1);
-    $sql->bindParam(":apellido2", $ape2);
-    $sql->bindParam(":telefono", $tel);
-    $sql->bindParam(":direccion", $dir);
+    $sql->bindParam(":dni", $dni);
+    $sql->bindParam(":edad", $edad);
+    $sql->bindParam(":sexo", $sexo);
+    $sql->bindParam(":raza", $raza);
+    $sql->bindParam(":fechaAlta", $fechaAlta);
+    $sql->bindParam(":foto", $foto);
     $sql->execute();
     $id = $con->lastInsertId();
     $con = null;
-    return $id;}
+    return $id;
+}
+
