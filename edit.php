@@ -1,37 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/botonera.css">
-        <link rel="stylesheet" href="css/form.css">
-        <title>Edita elemento</title>
-    </head>
-    <body>
-        <nav>
-            <ul>
-                <li><a href="index.php">Página principal</a></li>
-                <li><a href="create.php">Nuevo elemento</a></li>
-                <li><a class="active" href="list.php">Lista elementos</a></li>
-                <li><a href="import.php">Importar elementos</a></li>
-            </ul>
-        </nav>
-        <form class="form-register">
-            <h2 class="form-titulo">Características:</h2>
-            <div class="contenedor-inputs">
-                <input type="hidden" name="id"><!--aquí va el id, es hidden por lo tanto no es visible en la web, pero si accesible desde PHP -->
-                <input type="text" name="texto1" placeholder="Texto 1" class="input-100" required>
-                <input type="text" name="text2" placeholder="Texto 2" class="input-100" required>
-                <input type="text" name="texto3" placeholder="Texto 3" class="input-100" required>
-                <input type="number" name="numero1" placeholder="Número 1" class="input-48" required>
-                <input type="number" name="numero2" placeholder="Número 2" class="input-48"required >
-                <input type="date" name="fecha" placeholder="Fecha" class="input-100" required>
-                <img name="avatarActual" width=200px src=""><!-- Aquí tienes que cargar la imagen actual -->
-                <input type="file" name="avatar" accept="image/png, image/jpeg" class="input-100" >
-                <input type="submit" value="Editar" class="btn-enviar">
-                <div id="errores"></div>
-            </div>
-        </form>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/botonera.css">
+    <link rel="stylesheet" href="css/form.css">
+    <title>Edita gato</title>
+</head>
+
+<body>
+    <?php include "databaseManagement.inc.php";
+
+    $id = $_GET["varId"];
+    $gato = obtenerGato($id);
+    if (count($_POST) > 0) {
+        function seguro($valor)
+        {
+            $valor = strip_tags($valor);
+            $valor = stripslashes($valor);
+            $valor = htmlspecialchars($valor);
+            return $valor;
+        }
+        $id = $_POST["id"];
+        $gato = obtenerGato($id);
+        $image = '';
+        if ($_FILES["avatar"]["name"] != '') {
+            $image = $_FILES["avatar"]["name"];
+            $temp = $_FILES['avatar']['tmp_name'];
+            if (move_uploaded_file($temp, 'images/' . $image)) {
+                //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
+                chmod('images/' . $image, 777);
+            }
+        } else {
+            $image = $gato["foto"];
+        }
+        $cumplido = editarGato($id, seguro($_POST["nombre"]), $_POST["dni"], $_POST["edad"], seguro($_POST["sexo"]), seguro($_POST["raza"]), $_POST["fechaAlta"], $image);
+        if ($cumplido == true) {
+            header("Location: view.php?varId=" . $id);
+            exit();
+        } else {
+            $error = "Datos incorrectos";
+        }
+    }
+    ?>
+    <nav>
+        <ul>
+            <li><a href="index.php">Página principal</a></li>
+            <li><a href="create.php">Nuevo gato</a></li>
+            <li><a class="active" href="list.php">Lista gato</a></li>
+            <li><a href="import.php">Importar gato</a></li>
+        </ul>
+    </nav>
+    <form class="form-register" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+        <h2 class="form-titulo">Características:</h2>
+        <div class="contenedor-inputs">
+            <input type="hidden" name="id" value="<?php echo $gato["id"]; ?>">
+            <!--aquí va el id, es hidden por lo tanto no es visible en la web, pero si accesible desde PHP -->
+            <input type="text" name="nombre" placeholder="nombre" class="input-100" value=<?php echo $gato["nombre"]; ?> required>
+            <input type="text" name="raza" placeholder="raza" class="input-100" value=<?php echo $gato["raza"]; ?> required>
+            <input type="text" name="sexo" placeholder="H/M" class="input-100" value=<?php echo $gato["sexo"]; ?> required>
+            <input type="number" name="dni" placeholder="dni" class="input-48" value=<?php echo $gato["dni"]; ?> required>
+            <input type="number" name="edad" placeholder="edad" class="input-48" value=<?php echo $gato["edad"]; ?> required>
+            <input type="date" name="fechaAlta" placeholder="fecha de Alta" class="input-100" value=<?php echo $gato["fechaAlta"]; ?> required>
+            <img name="avatarActual" width=200px src=<?php echo "images/" . $gato["foto"]; ?>><!-- Aquí tienes que cargar la imagen actual -->
+            <input type="file" name="avatar" accept="image/png, image/jpeg" class="input-100">
+            <input type="submit" value="Editar" class="btn-enviar">
+            <div id="errores"><?php echo $error; ?></div>
+        </div>
+    </form>
+</body>
+
 </html>

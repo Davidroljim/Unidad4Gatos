@@ -35,7 +35,7 @@
            <?php
            $datos= obtenerTodos();
            for ($i=0; $i <count($datos) ; $i++) { 
-               echo "<tr><td>".$datos[$i]["nombre"]."</td><td>".$datos[$i]["dni"]."</td><td>".$datos[$i]["raza"]."</td><td>".$datos[$i]["fechaAlta"]."</td><td><a href='view.php?varid=".($i+1)."'>más detalles</a></td><td><a href='edit.php?varid=".($i+1)."'>Actualizar</a></td><td><a href='delete.php?varid=".($i+1)."'>Borrar</a></td></tr>";
+               echo "<tr><td>".$datos[$i]["nombre"]."</td><td>".$datos[$i]["dni"]."</td><td>".$datos[$i]["raza"]."</td><td>".$datos[$i]["fechaAlta"]."</td><td><a href='view.php?varId=".$datos[$i]["id"]."'>más detalles</a></td><td><a href='edit.php?varId=".$datos[$i]["id"]."'>Actualizar</a></td><td><a href='delete.php?varId=".$datos[$i]["id"]."'>Borrar</a></td></tr>";
            }
            
            

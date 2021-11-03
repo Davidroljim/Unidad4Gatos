@@ -1,8 +1,8 @@
 <?php
 $servidor = "localhost";
 $baseDatos = "animales";
-$usuario = "developer";
-$pass = "developer";
+$usuario = "root";
+$pass = "root";
 function obtenerGato($id)
 {
     try {
