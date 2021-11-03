@@ -1,8 +1,8 @@
 <?php
 $servidor = "localhost";
 $baseDatos = "animales";
-$usuario = "root";
-$pass = "root";
+$usuario = "developer";
+$pass = "developer";
 function obtenerGato($id)
 {
     try {
@@ -66,7 +66,7 @@ function obtenerTodos()
     } catch (PDOException $e) {
         echo $e;
     }
-    $sql = $con->prepare("SELECT id, nombre,raza,fechaAlta from gatos;");
+    $sql = $con->prepare("SELECT id, nombre,dni,raza,fechaAlta from gatos;");
     $sql->execute();
     $miArray = [];
     $cont = 0;

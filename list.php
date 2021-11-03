@@ -9,20 +9,22 @@
     <title>Lista elementos</title>
 </head>
 <body>
+<?php include_once "databaseManagement.inc.php";?>
+
     <nav>
         <ul>
             <li><a href="index.php">Página principal</a></li>
-            <li><a href="create.php">Nuevo elemento</a></li>
-            <li><a class="active" href="list.php">Lista elementos</a></li>
-            <li><a href="import.php">Importar elementos</a></li>
+            <li><a href="create.php">Nuevo gato</a></li>
+            <li><a class="active" href="list.php">Lista gatos</a></li>
+            <li><a href="import.php">Importar gatos</a></li>
         </ul>
     </nav>
     <table class="styled-table">
         <thead>
             <tr>
-                <th>Texto 1</th>
-                <th>Texto 2</th>
-                <th>Número 1</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Raza</th>
                 <th>Fecha</th>
                 <th>Detalle</th>
                 <th>Editar</th>
@@ -30,7 +32,14 @@
             </tr>
         </thead>
         <tbody>
-           <!-- Aquí tendrás que mostrar las filas de la tabla-->
+           <?php
+           $datos= obtenerTodos();
+           for ($i=0; $i <count($datos) ; $i++) { 
+               echo "<tr><td>".$datos[$i]["nombre"]."</td><td>".$datos[$i]["dni"]."</td><td>".$datos[$i]["raza"]."</td><td>".$datos[$i]["fechaAlta"]."</td><td><a href='view.php?varid=".($i+1)."'>más detalles</a></td><td><a href='edit.php?varid=".($i+1)."'>Actualizar</a></td><td><a href='delete.php?varid=".($i+1)."'>Borrar</a></td></tr>";
+           }
+           
+           
+           ?>
         </tbody>
     </table>
 </body>
