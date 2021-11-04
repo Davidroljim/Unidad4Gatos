@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/botonera.css">
     <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css" />
+
     <title>Lista elementos</title>
 </head>
 <body>
@@ -35,7 +37,7 @@
            <?php
            $datos= obtenerTodos();
            for ($i=0; $i <count($datos) ; $i++) { 
-               echo "<tr><td>".$datos[$i]["nombre"]."</td><td>".$datos[$i]["dni"]."</td><td>".$datos[$i]["raza"]."</td><td>".$datos[$i]["fechaAlta"]."</td><td><a href='view.php?varId=".$datos[$i]["id"]."'>más detalles</a></td><td><a href='edit.php?varId=".$datos[$i]["id"]."'>Actualizar</a></td><td><a href='delete.php?varId=".$datos[$i]["id"]."'>Borrar</a></td></tr>";
+               echo "<tr><td>".$datos[$i]["nombre"]."</td><td>".$datos[$i]["dni"]."</td><td>".$datos[$i]["raza"]."</td><td>".$datos[$i]["fechaAlta"]."</td><td><a href='view.php?varId=".$datos[$i]["id"]."'><i class='fas fa-info-circle'></i></a></td><td><a href='edit.php?varId=".$datos[$i]["id"]."'><i class='fas fa-edit'></i></a></td><td><a href='delete.php?varId=".$datos[$i]["id"]."'><i class='fas fa-trash-alt'></i></a></td></tr>";
            }
            
            

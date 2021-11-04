@@ -13,9 +13,16 @@
 <body>
     <?php include "databaseManagement.inc.php";
 
-    $id = $_GET["varId"];
-    $gato = obtenerGato($id);
+    if (count($_GET)>0) {
+        $id = $_GET["varId"];
+        $gato = obtenerGato($id);
+    }else{
+        $id = $_POST["id"];
+        $gato = obtenerGato($id);
+    }
+    $error = '';
     if (count($_POST) > 0) {
+        echo "src='images/" . $gato['foto'] . "'";
         function seguro($valor)
         {
             $valor = strip_tags($valor);
@@ -23,8 +30,7 @@
             $valor = htmlspecialchars($valor);
             return $valor;
         }
-        $id = $_POST["id"];
-        $gato = obtenerGato($id);
+        
         $image = '';
         if ($_FILES["avatar"]["name"] != '') {
             $image = $_FILES["avatar"]["name"];
@@ -41,8 +47,9 @@
             header("Location: view.php?varId=" . $id);
             exit();
         } else {
-            $error = "Datos incorrectos";
+            $error = "Datos incorrectos o no se ha actualizado nada";
         }
+        
     }
     ?>
     <nav>
@@ -64,7 +71,7 @@
             <input type="number" name="dni" placeholder="dni" class="input-48" value=<?php echo $gato["dni"]; ?> required>
             <input type="number" name="edad" placeholder="edad" class="input-48" value=<?php echo $gato["edad"]; ?> required>
             <input type="date" name="fechaAlta" placeholder="fecha de Alta" class="input-100" value=<?php echo $gato["fechaAlta"]; ?> required>
-            <img name="avatarActual" width=200px src=<?php echo "images/" . $gato["foto"]; ?>><!-- Aquí tienes que cargar la imagen actual -->
+            <img name="avatarActual" width=200px <?php if($gato["foto"]!=''){echo "src='images/" . $gato['foto'] . "'";}?> ><!-- Aquí tienes que cargar la imagen actual -->
             <input type="file" name="avatar" accept="image/png, image/jpeg" class="input-100">
             <input type="submit" value="Editar" class="btn-enviar">
             <div id="errores"><?php echo $error; ?></div>

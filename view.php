@@ -13,6 +13,9 @@
     <?php include "databaseManagement.inc.php";
     $id=$_GET["varId"];
     $gato=obtenerGato($id);
+    if($gato["foto"]==''){
+        $gato["foto"]="noimage.jpg";
+    }
     ?>
         <nav>
             <ul>

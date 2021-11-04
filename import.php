@@ -11,7 +11,7 @@
 
 <body>
     <?php include "databaseManagement.inc.php";
-
+    $confirmacion = '';
     if (count($_FILES) > 0) {
         $fichero = $_FILES["dataToImport"]["name"];
         $temp = $_FILES['dataToImport']['tmp_name'];
