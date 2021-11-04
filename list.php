@@ -19,6 +19,7 @@
             <li><a href="create.php">Nuevo gato</a></li>
             <li><a class="active" href="list.php">Lista gatos</a></li>
             <li><a href="import.php">Importar gatos</a></li>
+            <li><a href="export.php">Exportar gatos</a></li>
         </ul>
     </nav>
     <table class="styled-table">

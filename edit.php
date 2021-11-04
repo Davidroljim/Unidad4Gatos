@@ -22,7 +22,6 @@
     }
     $error = '';
     if (count($_POST) > 0) {
-        echo "src='images/" . $gato['foto'] . "'";
         function seguro($valor)
         {
             $valor = strip_tags($valor);
@@ -37,11 +36,13 @@
             $temp = $_FILES['avatar']['tmp_name'];
             if (move_uploaded_file($temp, 'images/' . $image)) {
                 //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
-                chmod('images/' . $image, 777);
+                chmod('images/' . $image, 0777);
             }
         } else {
             $image = $gato["foto"];
         }
+        
+ 
         $cumplido = editarGato($id, seguro($_POST["nombre"]), $_POST["dni"], $_POST["edad"], seguro($_POST["sexo"]), seguro($_POST["raza"]), $_POST["fechaAlta"], $image);
         if ($cumplido == true) {
             header("Location: view.php?varId=" . $id);
@@ -58,6 +59,7 @@
             <li><a href="create.php">Nuevo gato</a></li>
             <li><a class="active" href="list.php">Lista gato</a></li>
             <li><a href="import.php">Importar gato</a></li>
+            <li><a href="export.php">Exportar gatos</a></li>
         </ul>
     </nav>
     <form class="form-register" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">

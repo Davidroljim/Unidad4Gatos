@@ -27,7 +27,7 @@
 
         if (move_uploaded_file($temp, 'images/' . $avatar)) {
             //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
-            chmod('images/' . $avatar, 777);
+            chmod('images/' . $avatar, 0777);
         }
         $id = insertaGato(seguro($_POST["nombre"]), $_POST["dni"], $_POST["edad"], seguro($_POST["sexo"]), seguro($_POST["raza"]), $_POST["fechaAlta"], $avatar);
         if ($id != 0) {
@@ -44,6 +44,7 @@
             <li><a class="active" href="create.php">Nuevo gato</a></li>
             <li><a href="list.php">Lista gatos</a></li>
             <li><a href="import.php">Importar gatos</a></li>
+            <li><a href="export.php">Exportar gatos</a></li>
         </ul>
     </nav>
     <form class="form-register" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">

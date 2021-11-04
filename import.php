@@ -18,7 +18,7 @@
         $cont = 0;
         if (move_uploaded_file($temp, $fichero)) {
             //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
-            chmod($fichero, 777);
+            chmod($fichero, 0777);
             //Recuperando la informacion del fichero
             $file = fopen($fichero, "r");
             while (($datos = fgetcsv($file)) != false) {
@@ -41,6 +41,7 @@
             <li><a href="create.php">Nuevo gato</a></li>
             <li><a href="list.php">Lista gato</a></li>
             <li><a class="active" href="import.php">Importar gato</a></li>
+            <li><a href="export.php">Exportar gatos</a></li>
         </ul>
     </nav>
     <form enctype="multipart/form-data" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">

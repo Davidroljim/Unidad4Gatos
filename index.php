@@ -16,6 +16,8 @@
             <li><a href="create.php">Nuevo gato</a></li>
             <li><a href="list.php">Lista gatos</a></li>
             <li><a href="import.php">Importar gatos</a></li>
+            <li><a href="export.php">Exportar gatos</a></li>
+
         </ul>
     </nav>
     <h1>Adopción de gatos</h1>
