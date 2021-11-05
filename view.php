@@ -13,7 +13,7 @@
     <?php include "databaseManagement.inc.php";
     $id=$_GET["varId"];
     $gato=obtenerGato($id);
-    if($gato["foto"]==''){
+    if($gato["foto"]=='' || !file_exists("images/".$gato["foto"])){
         $gato["foto"]="noimage.jpg";
     }
     ?>
@@ -32,7 +32,7 @@
             <header>
                 <div class="bio">
                     
-                    <img src="<?php echo "images/".$gato["foto"];?>" alt="background" class="bg"><!--aquí va el link a la imagen-->
+                    <img <?php ?> <?php echo "src= 'images/".$gato['foto']."'";?> class="bg"><!--aquí va el link a la imagen-->
                     <div>
                         <h3><?php echo $gato["nombre"]?></h3><!--aquí va el valor del texto 1-->
                         <p><?php echo $gato["raza"]?></p><!-- aquí va el valor del texto 2--> 

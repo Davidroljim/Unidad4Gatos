@@ -13,13 +13,13 @@
     <?php include "databaseManagement.inc.php";
     $confirmacion = '';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $gatos = obtenerTodos();
+        $gatos = obtenerTodosCSV();
         if ($file = fopen("datosGatos.csv", 'a')) {
             for ($i = 0; $i < count($gatos); $i++) {
-                $gatoDatos = array($gatos[$i]["id"], $gatos[$i]["nombre"], $gatos[$i]["dni"], $gatos[$i]["raza"], $gatos[$i]["fechaAlta"]);
+                $gatoDatos = array($gatos[$i]["id"], $gatos[$i]["nombre"], $gatos[$i]["dni"], $gatos[$i]["edad"], $gatos[$i]["sexo"],$gatos[$i]["raza"], $gatos[$i]["fechaAlta"]);
                 fputcsv($file, $gatoDatos, ',');
             }
-            $confirmacion = "Se han exportado los datos con éxito";
+            $confirmacion = "Se han exportado los datos en el fichero datosGatos.csv con éxito";
         } else {
             $confirmacion = "Error en exportar";
         }
@@ -31,8 +31,8 @@
             <li><a href="index.php">Página principal</a></li>
             <li><a href="create.php">Nuevo gato</a></li>
             <li><a href="list.php">Lista gato</a></li>
-            <li><a class="active" href="import.php">Importar gato</a></li>
-            <li><a href="export.php">Exportar gatos</a></li>
+            <li><a  href="import.php">Importar gato</a></li>
+            <li><a class="active" href="export.php">Exportar gatos</a></li>
 
         </ul>
     </nav>

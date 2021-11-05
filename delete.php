@@ -11,7 +11,7 @@
     <?php include "databaseManagement.inc.php";
     $id= $_GET["varId"];
     $cumplido=eliminarGato($id);
-    $error='Se ha borrado el gato seleccionado!!';
+    $error='Se ha borrado el gato con el id: ' . $id;
     if(!$cumplido){
         $error="Error al borrar el gato seleccionado";
     }

@@ -65,10 +65,8 @@ function obtenerTodos()
         $sql = $con->prepare("SELECT id, nombre,dni,raza,fechaAlta from gatos;");
         $sql->execute();
         $miArray = [];
-        $cont = 0;
         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $miArray[$cont] = $row;
-            $cont++;
+            $miArray[] = $row;
         }
     } catch (PDOException $e) {
         echo $e;
@@ -95,4 +93,20 @@ function insertaGato($nombre, $dni, $edad, $sexo, $raza, $fechaAlta, $foto)
     }
     $con = null;
     return $id;
+}
+
+function obtenerTodosCSV(){
+    try {
+        $con = new PDO("mysql:host=" . $GLOBALS['servidor'] . ";dbname=" . $GLOBALS['baseDatos'], $GLOBALS['usuario'], $GLOBALS['pass']);
+        $sql = $con->prepare("SELECT id, nombre,dni,edad,sexo,raza,fechaAlta from gatos;");
+        $sql->execute();
+        $miArray = [];
+        while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $miArray[] = $row;
+        }
+    } catch (PDOException $e) {
+        echo $e;
+    }
+    $con = null;
+    return $miArray;
 }

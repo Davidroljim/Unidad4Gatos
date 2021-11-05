@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css" />
 
-    <title>Lista elementos</title>
+    <title>Lista gatos</title>
 </head>
 <body>
 <?php include_once "databaseManagement.inc.php";?>
@@ -40,8 +40,6 @@
            for ($i=0; $i <count($datos) ; $i++) { 
                echo "<tr><td>".$datos[$i]["nombre"]."</td><td>".$datos[$i]["dni"]."</td><td>".$datos[$i]["raza"]."</td><td>".$datos[$i]["fechaAlta"]."</td><td><a href='view.php?varId=".$datos[$i]["id"]."'><i class='fas fa-info-circle'></i></a></td><td><a href='edit.php?varId=".$datos[$i]["id"]."'><i class='fas fa-edit'></i></a></td><td><a href='delete.php?varId=".$datos[$i]["id"]."'><i class='fas fa-trash-alt'></i></a></td></tr>";
            }
-           
-           
            ?>
         </tbody>
     </table>

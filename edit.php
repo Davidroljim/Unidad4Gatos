@@ -67,13 +67,13 @@
         <div class="contenedor-inputs">
             <input type="hidden" name="id" value="<?php echo $gato["id"]; ?>">
             <!--aquí va el id, es hidden por lo tanto no es visible en la web, pero si accesible desde PHP -->
-            <input type="text" name="nombre" placeholder="nombre" class="input-100" value=<?php echo $gato["nombre"]; ?> required>
-            <input type="text" name="raza" placeholder="raza" class="input-100" value=<?php echo $gato["raza"]; ?> required>
-            <input type="text" name="sexo" placeholder="H/M" class="input-100" value=<?php echo $gato["sexo"]; ?> required>
-            <input type="number" name="dni" placeholder="dni" class="input-48" value=<?php echo $gato["dni"]; ?> required>
-            <input type="number" name="edad" placeholder="edad" class="input-48" value=<?php echo $gato["edad"]; ?> required>
-            <input type="date" name="fechaAlta" placeholder="fecha de Alta" class="input-100" value=<?php echo $gato["fechaAlta"]; ?> required>
-            <img name="avatarActual" width=200px <?php if($gato["foto"]!=''){echo "src='images/" . $gato['foto'] . "'";}?> ><!-- Aquí tienes que cargar la imagen actual -->
+            <input type="text" name="nombre" placeholder="nombre" class="input-100" value='<?php echo $gato["nombre"]; ?>' required>
+            <input type="text" name="raza" placeholder="raza" class="input-100" value='<?php echo $gato["raza"]; ?>' required>
+            <input type="text" name="sexo" placeholder="H/M" class="input-100" value='<?php echo $gato["sexo"]; ?>' required>
+            <input type="number" name="dni" placeholder="dni" class="input-48" value='<?php echo $gato["dni"]; ?>' required>
+            <input type="number" name="edad" placeholder="edad" class="input-48" value='<?php echo $gato["edad"]; ?>' required>
+            <input type="date" name="fechaAlta" placeholder="fecha de Alta" class="input-100" value='<?php echo $gato["fechaAlta"]; ?>' required>
+            <img name="avatarActual" width=200px <?php if($gato["foto"]!='' && file_exists("images/".$gato["foto"]) ){echo "src='images/" . $gato['foto'] . "'";}?> ><!-- Aquí tienes que cargar la imagen actual -->
             <input type="file" name="avatar" accept="image/png, image/jpeg" class="input-100">
             <input type="submit" value="Editar" class="btn-enviar">
             <div id="errores"><?php echo $error; ?></div>
