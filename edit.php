@@ -13,10 +13,10 @@
 <body>
     <?php include "databaseManagement.inc.php";
 
-    if (count($_GET)>0) {
+    if (count($_GET) > 0) {
         $id = $_GET["varId"];
         $gato = obtenerGato($id);
-    }else{
+    } else {
         $id = $_POST["id"];
         $gato = obtenerGato($id);
     }
@@ -29,7 +29,7 @@
             $valor = htmlspecialchars($valor);
             return $valor;
         }
-        
+
         $image = '';
         if ($_FILES["avatar"]["name"] != '') {
             $image = $_FILES["avatar"]["name"];
@@ -41,8 +41,8 @@
         } else {
             $image = $gato["foto"];
         }
-        
- 
+
+
         $cumplido = editarGato($id, seguro($_POST["nombre"]), $_POST["dni"], $_POST["edad"], seguro($_POST["sexo"]), seguro($_POST["raza"]), $_POST["fechaAlta"], $image);
         if ($cumplido == true) {
             header("Location: view.php?varId=" . $id);
@@ -50,7 +50,6 @@
         } else {
             $error = "Datos incorrectos o no se ha actualizado nada";
         }
-        
     }
     ?>
     <nav>
@@ -73,7 +72,9 @@
             <input type="number" name="dni" placeholder="dni" class="input-48" value='<?php echo $gato["dni"]; ?>' required>
             <input type="number" name="edad" placeholder="edad" class="input-48" value='<?php echo $gato["edad"]; ?>' required>
             <input type="date" name="fechaAlta" placeholder="fecha de Alta" class="input-100" value='<?php echo $gato["fechaAlta"]; ?>' required>
-            <img name="avatarActual" width=200px <?php if($gato["foto"]!='' && file_exists("images/".$gato["foto"]) ){echo "src='images/" . $gato['foto'] . "'";}?> ><!-- Aquí tienes que cargar la imagen actual -->
+            <img name="avatarActual" width=200px <?php if ($gato["foto"] != '' && file_exists("images/" . $gato["foto"])) {
+                                                        echo "src='images/" . $gato['foto'] . "'";
+                                                    } ?>><!-- Aquí tienes que cargar la imagen actual -->
             <input type="file" name="avatar" accept="image/png, image/jpeg" class="input-100">
             <input type="submit" value="Editar" class="btn-enviar">
             <div id="errores"><?php echo $error; ?></div>

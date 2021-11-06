@@ -24,7 +24,6 @@
         }
         $avatar = $_FILES["avatar"]["name"];
         $temp = $_FILES['avatar']['tmp_name'];
-
         if (move_uploaded_file($temp, 'images/' . $avatar)) {
             //Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
             chmod('images/' . $avatar, 0777);

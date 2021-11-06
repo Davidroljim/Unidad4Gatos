@@ -62,8 +62,9 @@
     <ul>
         <li>Los iconos de las columnas borrar, detalles e editar de la tabla, cambiados.</li>
         <li>Los formularios validados de forma segura.</li>
-        <li>La funcionalidad de exportar los datos de la base de datos en un fichero csv, realizada.</li>
+        <li>La funcionalidad de exportar los datos de la base de datos en un fichero csv con formato csv obligatoriamente, realizada.</li>
         <li>Si un registro no tiene foto o su foto no existe por alguna razón en la carpeta del proyecto, nos muestra la imagen: noimage.</li>
+        <li>Css adaptado a los formularios export e import.</li>
     </ul>
 
 </body>
